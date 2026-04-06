@@ -41,6 +41,21 @@ export default function RoleSelect({ user, onSelect, onLogout }) {
             </ul>
             <div className="role-card-cta">Go to Seller Dashboard →</div>
           </button>
+
+          {user?.role === "admin" && (
+            <button className="role-card admin-card" onClick={() => onSelect("admin")}>
+              <div className="role-card-icon">🛡️</div>
+              <h3>Admin Panel</h3>
+              <p>Review and approve resources uploaded by sellers on the platform.</p>
+              <ul>
+                <li>✓ Review pending resources</li>
+                <li>✓ Approve or reject listings</li>
+                <li>✓ Manage platform quality</li>
+                <li>✓ View all transactions</li>
+              </ul>
+              <div className="role-card-cta">Go to Admin Dashboard →</div>
+            </button>
+          )}
         </div>
 
         <p className="roleselect-hint">
@@ -117,6 +132,10 @@ export default function RoleSelect({ user, onSelect, onLogout }) {
           width: 100%;
           max-width: 740px;
         }
+        .roleselect-cards:has(.admin-card) {
+          grid-template-columns: 1fr 1fr 1fr;
+          max-width: 1000px;
+        }
         .role-card {
           background: #fff;
           border: 2px solid var(--border);
@@ -136,6 +155,11 @@ export default function RoleSelect({ user, onSelect, onLogout }) {
         }
         .buyer-card:hover { border-color: var(--ink); }
         .seller-card:hover { border-color: var(--accent); }
+        .admin-card:hover { border-color: #7c3aed; }
+        .admin-card {
+          background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(124, 58, 237, 0.02) 100%);
+          border-color: rgba(124, 58, 237, 0.3);
+        }
         .role-card-icon { font-size: 2.5rem; }
         .role-card h3 {
           font-family: var(--font-display);
@@ -159,6 +183,7 @@ export default function RoleSelect({ user, onSelect, onLogout }) {
         }
         @media (max-width: 600px) {
           .roleselect-cards { grid-template-columns: 1fr; }
+          .roleselect-cards:has(.admin-card) { grid-template-columns: 1fr; max-width: 100%; }
         }
       `}</style>
     </div>
